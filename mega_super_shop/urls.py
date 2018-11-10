@@ -23,4 +23,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path(r'', Home.as_view()),
     url(r'^$', Home.as_view()),
+    ewrewr
+    werew
+    werwe
 ]
