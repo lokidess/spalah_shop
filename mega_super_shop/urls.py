@@ -23,4 +23,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path(r'', Home.as_view()),
     url(r'^$', Home.as_view()),
+    fdgdfb
+    d dfb
+    vd fd
+    dfdgfg
 ]
