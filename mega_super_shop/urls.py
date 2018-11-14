@@ -13,17 +13,19 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.conf import settings
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 
-from core.views import Home
+from core.views import Home, TradeMarkView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    path(r'', Home.as_view()),
-    url(r'^$', Home.as_view()),
+    path(r'', Home.as_view(), name='home'),
+    path('trade_mark/<int:trade_mark_id>/', TradeMarkView.as_view(), name='trade_mark')
+    #url(r'trade_mark/(?P<pk>\d+)/', )
 ]
 
 if settings.DEBUG:
@@ -35,3 +37,5 @@ if settings.DEBUG:
         # url(r'^__debug__/', include(debug_toolbar.urls)),
 
     ] + urlpatterns
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
