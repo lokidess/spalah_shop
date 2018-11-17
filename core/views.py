@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, FormView
 
+from core.forms import RegisterForm
 from core.models import Products, TradeMark
 
 
@@ -10,7 +11,9 @@ class Home(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(Home, self).get_context_data(**kwargs)
 
-        products = Products.objects.all().select_related().order_by('price')[:2]  # JOIN for ForeignKey
+        products = Products.objects.filter(
+            status=Products.STATUS_IN_STOCK
+        ).select_related().order_by('price')[:12]  # JOIN for ForeignKey
         context['products'] = products
         return context
 
@@ -29,3 +32,12 @@ class TradeMarkView(ListView):
         # )
         return queryset
 
+
+class Register(FormView):
+    template_name = 'auth/registration.html'
+    form_class = RegisterForm
+    success_url = '/'
+
+    def form_valid(self, form):
+        form.save()
+        return super(Register, self).form_valid(form)

@@ -1,24 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="row">
-    {% for product in object_list %}
-        <div class="col-sm-6 col-md-4">
-            <div class="thumbnail">
-              <img src="/media/{{ product.image }}" style="max-width: 200px;">
-              <div class="caption">
-                <h3>{{ product.name }}</h3>
-                <p>
-                    {{ product.description }}
-                    <br>
-                    {{ product.trade_mark.name }}
-                    <br>
-                    <b>${{ product.price }}</b>
-                </p>
-                <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-              </div>
+    <div class="row">
+        {% for product in object_list %}
+        <div class="col-lg-4 col-md-6 mb-4">
+          <div class="card h-100">
+            <a href="#"><img class="card-img-top" src="/media/{{ product.image }}" alt=""></a>
+            <div class="card-body">
+              <h4 class="card-title">
+                <a href="#">{{product.name}}</a>
+              </h4>
+              <h5>${{product.price}}</h5>
+                <p>{{product.status}}</p>
+              <p class="card-text">
+                  {{product.description}}
+              </p>
             </div>
+            <div class="card-footer">
+              <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+            </div>
+          </div>
         </div>
-    {% endfor %}
-</div>
+        {% endfor %}
+    </div>
 {% endblock %}

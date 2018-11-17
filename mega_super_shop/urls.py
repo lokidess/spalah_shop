@@ -19,13 +19,13 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 
-from core.views import Home, TradeMarkView
-
+from core.views import Home, TradeMarkView, Register
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path(r'', Home.as_view(), name='home'),
-    path('trade_mark/<int:trade_mark_id>/', TradeMarkView.as_view(), name='trade_mark')
-    #url(r'trade_mark/(?P<pk>\d+)/', )
+    path('trade_mark/<int:trade_mark_id>/', TradeMarkView.as_view(), name='trade_mark'),
+    path('registration/', Register.as_view(), name='registration'),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:
@@ -39,3 +39,4 @@ if settings.DEBUG:
     ] + urlpatterns
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
