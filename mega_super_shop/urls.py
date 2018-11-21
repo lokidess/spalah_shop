@@ -19,13 +19,16 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 
-from core.views import Home, TradeMarkView, Register
+from core.views import Home, TradeMarkView, Register, CheckoutView, ThankYouView
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path(r'', Home.as_view(), name='home'),
     path('trade_mark/<int:trade_mark_id>/', TradeMarkView.as_view(), name='trade_mark'),
     path('registration/', Register.as_view(), name='registration'),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('checkout/<int:product_id>/', CheckoutView.as_view(), name='checkout'),
+    path('thanks/', ThankYouView.as_view(), name='thank_you')
 ]
 
 if settings.DEBUG:

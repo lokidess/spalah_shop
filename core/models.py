@@ -54,3 +54,7 @@ class Products(models.Model):
     @property
     def total(self):
         return self.price * self.count
+
+    @property
+    def price_for_stripe(self):
+        return self.price * 100

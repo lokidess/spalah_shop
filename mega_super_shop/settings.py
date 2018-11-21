@@ -52,6 +52,14 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'core.middleware.TimeOfView'
+]
+
+# https://docs.djangoproject.com/en/2.1/topics/auth/customizing/#specifying-authentication-backends
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'core.email_auth_backend.AuthByEmail'
 ]
 
 ROOT_URLCONF = 'mega_super_shop.urls'
@@ -67,7 +75,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'core.context_processor.trade_marks'
+                'core.context_processor.trade_marks',
+                'core.context_processor.stripe_pk_key'
             ],
         },
     },
@@ -129,3 +138,7 @@ MEDIA_PATH = os.path.join(BASE_DIR, 'media')
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGOUT_REDIRECT_URL = LOGIN_REDIRECT_URL = '/'
+
+STRIPE_SECRET_KEY = "sk_test_N8nuG8gwWfAcprE3wuhJ1PGl"
+STRIPE_PUBLIC_KEY = "pk_test_apyKVmyOhM0OqssY0eqLKvSZ"
+
